@@ -13,6 +13,9 @@
         android:theme="@style/Theme.ChatApp"
         tools:targetApi="31">
         <activity
+            android:name=".presenstation.view.ChatPageActivity"
+            android:exported="false" />
+        <activity
             android:name=".presenstation.view.HomeActivity"
             android:exported="false" />
         <activity

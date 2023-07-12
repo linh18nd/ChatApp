@@ -6,20 +6,20 @@ class Converstation {
     var type: String? = null
     var lastMessage: String? = "Cuộc trò chuyện mới"
     var lastMessageAt: Long? = null
-    var participants: ArrayList<String> = ArrayList()
+    var participants: ArrayList<String?> = ArrayList()
 
     constructor() {}
 
     constructor(
         converstationId: String?,
-        createAt: String?,
+        createAt: Long,
         type: String?,
         lastMessage: String?,
         lastMessageAt: Long?,
-        participants: ArrayList<String>
+        participants: ArrayList<String?>
     ) {
         this.converstationId = converstationId
-        this.createAt = createAt
+        this.createAt = createAt.toString()
         this.type = type
         this.lastMessage = lastMessage
         this.lastMessageAt = lastMessageAt
