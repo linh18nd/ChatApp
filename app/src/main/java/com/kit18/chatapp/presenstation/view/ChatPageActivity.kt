@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kit18.chatapp.R
@@ -13,9 +14,6 @@ import com.kit18.chatapp.data.model.Message
 import com.kit18.chatapp.data.remote.MessageProvider
 import kotlinx.coroutines.*
 import java.util.UUID
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
-import kotlin.coroutines.suspendCoroutine
 
 class ChatPageActivity : AppCompatActivity() {
     private val messageList = ArrayList<Message>()
@@ -38,6 +36,13 @@ class ChatPageActivity : AppCompatActivity() {
         findViewById<androidx.appcompat.widget.AppCompatButton>(R.id.sendButton).setOnClickListener {
             sendMessage()
         }
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        toolbar.setNavigationIcon(com.google.android.material.R.drawable.material_ic_keyboard_arrow_previous_black_24dp)
+        toolbar.navigationIcon?.setTint(resources.getColor( R.color.white))
+        toolbar.setNavigationOnClickListener {
+            finish()
+        }
+
     }
 
     @SuppressLint("SuspiciousIndentation")
@@ -58,13 +63,11 @@ class ChatPageActivity : AppCompatActivity() {
                 }
             } catch (e: Exception) {
                 // Xử lý lỗi nếu cần
-                Toast.makeText(this@ChatPageActivity, "Lỗi khi tải tin nhắn", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ChatPageActivity, "Lỗi khi tải tin nhắn", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
-
-
-
 
 
     private fun setupRecyclerView() {
