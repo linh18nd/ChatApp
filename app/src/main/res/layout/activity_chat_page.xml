@@ -3,13 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presenstation.view.ChatPageActivity">
 
-    <ListView
-        android:id="@+id/chatListView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chatRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@android:color/darker_gray"
+        android:layout_marginBottom="35dp"
+        app:reverseLayout="true"
+        app:stackFromEnd="true"
         android:dividerHeight="1dp" />
 
     <LinearLayout
@@ -21,7 +25,7 @@
 
         <EditText
             android:id="@+id/messageEditText"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="Enter your message" />

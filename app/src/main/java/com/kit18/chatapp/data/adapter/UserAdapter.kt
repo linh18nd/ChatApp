@@ -44,13 +44,14 @@ class UserAdapter(private val userList: ArrayList<UserModel>) :
                         if (it.isNotEmpty()) {
                             Toast.makeText(
                                 holder.itemView.context,
-                                "Đang tạo cuộc trò chuyện",
+                                "Đang vào cuộc trò chuyện",
                                 Toast.LENGTH_SHORT
                             ).show()
                             val intent =
                                 Intent(holder.itemView.context, ChatPageActivity::class.java)
-                            intent.putExtra("converstationId", it)
-                            intent.putExtra("receiverId", currentUser.uid)
+                            intent.putExtra("conversationId",  it)
+
+                            intent.putExtra("currentId", currentUser.uid)
                             holder.itemView.context.startActivity(intent)
                         } else {
                             Toast.makeText(

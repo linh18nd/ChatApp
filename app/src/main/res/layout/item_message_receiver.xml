@@ -1,44 +1,48 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="16dp">
 
-    <ImageView
-        android:id="@+id/avatarImageView"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:src="@drawable/avatar_placeholder"
-        android:contentDescription="@string/avatar_description" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle_background">
+
+            <ImageView
+                android:id="@+id/avatarReceiverImageView"
+                android:layout_width="19dp"
+                android:layout_height="18dp"
+                android:contentDescription=""
+                android:src="@drawable/image_boder" />
+
+        </FrameLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/senderNameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="John Doe"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/messageContentTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_message_receiver"
-            android:text="Hello, how are you?"
             android:textColor="@color/black"
+            android:text="xin chao tooi laf linh"
             android:textSize="14sp"
             android:maxWidth="240dp"
             android:ellipsize="end"
-            android:singleLine="true"
+            android:singleLine="false"
             android:layout_marginTop="4dp"
             android:padding="8dp" />
 
@@ -48,7 +52,8 @@
             android:layout_height="wrap_content"
             android:text="10:30 AM"
             android:textSize="12sp"
-            android:textColor="@color/gray" />
+            android:textColor="@color/gray"
+            android:layout_marginTop="4dp" />
 
     </LinearLayout>
 

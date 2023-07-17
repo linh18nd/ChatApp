@@ -1,8 +1,9 @@
 package com.kit18.chatapp.data.remote
 
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.kit18.chatapp.data.model.Converstation
+import com.kit18.chatapp.data.model.Conversation
 import com.kit18.chatapp.data.model.Message
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
@@ -15,7 +16,7 @@ class ConverstationProvider {
 
     suspend fun createConverstation(participants: ArrayList<String?>, callback: (String) -> Unit) {
         val id = UUID.randomUUID().toString()
-        val converstation = Converstation(
+        val conversation = Conversation(
             id,
             System.currentTimeMillis(),
             "private",
@@ -23,10 +24,10 @@ class ConverstationProvider {
             System.currentTimeMillis(),
             participants
         )
-        db.collection("converstations")
-            .add(converstation)
+        db.collection("conversations").document(id)
+            .set(conversation)
             .addOnSuccessListener { documentReference ->
-                callback(documentReference.id)
+                callback(id)
             }
             .addOnFailureListener { e ->
                 println("Error adding document: $e")
@@ -37,21 +38,23 @@ class ConverstationProvider {
         val uid = mAuth.uid
 
         val data = withContext(Dispatchers.IO) {
-            db.collection("converstations")
+            db.collection("conversations")
                 .whereArrayContains("participants", uid!!)
 
                 .get()
                 .await()
         }
-
+val conversation = data.toObjects(Conversation::class.java)
         for (document in data) {
-            val converstation = document.toObject(Converstation::class.java)
-            if (converstation.participants.contains(friendId)) {
-                callback(converstation.converstationId!!)
+            Log.d("TAG", "${document.id} => ${document.data}")
+            val conversation = document.toObject(Conversation::class.java)
+            if (conversation!!.participants.contains(friendId)) {
+                callback(conversation.conversationId!!)
                 return
             }
 
         }
+
         arrayListOf(uid, friendId).let {
             createConverstation(it) { conversationId ->
                 callback(conversationId)
@@ -59,8 +62,8 @@ class ConverstationProvider {
         }
     }
 
-    fun getMessages(conversationId: String, callback: (MutableList<Message>) -> Unit) {
-        db.collection("converstations")
+    suspend fun getMessages(conversationId: String, callback: (MutableList<Message>) -> Unit) {
+        db.collection("conversations")
             .document(conversationId)
             .collection("messages")
             .orderBy("createAt")

@@ -1,24 +1,25 @@
 package com.kit18.chatapp.data.model
 
-class Converstation {
-    var converstationId: String? = null
+class Conversation {
+    var conversationId: String? = null
     var createAt: String? = null
     var type: String? = null
     var lastMessage: String? = "Cuộc trò chuyện mới"
     var lastMessageAt: Long? = null
     var participants: ArrayList<String?> = ArrayList()
 
+
     constructor() {}
 
     constructor(
-        converstationId: String?,
+        conversationId: String?,
         createAt: Long,
         type: String?,
         lastMessage: String?,
         lastMessageAt: Long?,
         participants: ArrayList<String?>
     ) {
-        this.converstationId = converstationId
+        this.conversationId = conversationId
         this.createAt = createAt.toString()
         this.type = type
         this.lastMessage = lastMessage
